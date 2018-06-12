@@ -1,3 +1,4 @@
+// click event for craeting a new burger
 $("#submit-burger").on("click", function(e){
     e.preventDefault();
     newBurger = {
@@ -10,7 +11,7 @@ $("#submit-burger").on("click", function(e){
     }
 })
 
-
+// helper function for creating a burger
 function createBurger(newBurger){
     
     $.post("/api/burgers", newBurger, function(burgerId){
@@ -26,7 +27,7 @@ function createBurger(newBurger){
     });
 }
 
-
+// click event fo updating a burger 
 $(document).on("click",".change-devoured", function(e){
     e.preventDefault();
     var updatedBurger = {
@@ -34,28 +35,27 @@ $(document).on("click",".change-devoured", function(e){
         name: $(this).siblings(".burger-name").text(),
         devoured: true
     }
-    var burgerID = $(this).attr("data-id");
-
+    console.log(updatedBurger);
     updateBurger(updatedBurger);
 })
 
-
+// helper function for updating a burger
 function updateBurger(updatedBurger){
-    
     $.ajax("/api/burgers/"+ updatedBurger.id, {
         type: "PUT"
     })
-    .then(function(burger, statusText, xhr){
-        console.log(statusText === "success" && xhr.status === 200);
-        if(statusText === "success" && xhr.status === 200){
+    .then(function(dbBurger){        
+        if(dbBurger.length === 1 && dbBurger[0] === 1){
            $("[data-id='"+ updatedBurger.id +"']").parent().remove();
             burgerTemplate(updatedBurger);
+        }
+        else {
+            alert("try again");
         } 
     })
 }
 
-
-
+// helper function for creating html for a burger being displayed
 function burgerTemplate(burger){
     var li = $("<li>");
     var p = $("<p>")

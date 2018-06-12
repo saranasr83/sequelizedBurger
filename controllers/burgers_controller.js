@@ -9,9 +9,22 @@ var router = express.Router();
 router.get("/", function (req, res) {
     db.Burger.findAll({})
         .then(function (dbBurger) {
-            return res.render("index", dbBurger);
+            // handlebars object to be sent to the template
+            var hdlbrObj = {
+                burgers: []
+            }
+
+            // loop through all the data that comes back from the query
+            // take the obj we want and place them in an empty array
+            dbBurger.forEach(function(item){
+                hdlbrObj.burgers.push(item.dataValues);
+            });
+
+            // send handlebars object to index and render
+            return res.render("index", hdlbrObj);
         })
 });
+
 //create
 router.post("/api/burgers", function (req, res) {
     console.log("req.body", req.body);
@@ -26,12 +39,17 @@ router.post("/api/burgers", function (req, res) {
 
 //update
 router.put("/api/burgers/:id", function (req, res) {
-
-    db.Burger.update({
+    db.Burger.update(
+    {
+        devoured: true
+    },
+    {
         where: {
-            id: req.body.id
+            id: req.params.id
         }
-    }).then(function (dbBurger) {
+    }
+    ).then(function (dbBurger) {
+        // dbBurger is an array of how many items were updated
         res.json(dbBurger);
     });
 
