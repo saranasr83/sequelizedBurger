@@ -1,0 +1,47 @@
+h1{
+    text-align: center;
+    color:rgb(1, 104, 1);
+    margin-top: 100px;
+}
+body {
+    background: url(../img/background.jpg) fixed no-repeat center;
+    background-size: cover;  
+}
+.form {
+    text-align: center;
+    margin-top: 10%;
+}
+.p1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+.btn.btn-primary{
+    margin-top: 10px;
+    background-color:rgb(1, 104, 1);
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+img{
+    height: 210px;
+    margin-left: 512px;
+    margin-bottom: -100px;
+}
+.form-control{
+    height: 60px;
+    width: 250px;
+    margin-top: -30px;
+}
+.burger-name{
+    font-weight: bold;
+    font-size: 20px; 
+    background-color: rgb(9, 100, 9);
+    width: 250px;
+    padding: 10px;
+}
+.change-devoured{
+    font-weight: bold;
+    font-size: 15px;
+}
